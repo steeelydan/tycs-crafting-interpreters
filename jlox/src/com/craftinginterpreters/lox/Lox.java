@@ -38,7 +38,9 @@ public class Lox {
         for (;;) {
             System.out.print("> ");
             String line = reader.readLine();
-            if (line == null) break;
+            if (line == null) {
+                break;
+            }
             run(line);
             hadError = false;
         }
@@ -54,7 +56,7 @@ public class Lox {
         }
     }
 
-    static void error (int line, String message) {
+    static void error(int line, String message) {
         report(line, "", message);
     }
 
@@ -63,4 +65,3 @@ public class Lox {
         hadError = true;
     }
 }
-

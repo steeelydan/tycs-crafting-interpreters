@@ -98,7 +98,9 @@ public class Scanner {
             case '/':
                 if (match('/')) {
                     // A comment goes until the end of the line.
-                    while (peek() != '\n' && !isAtEnd()) advance();
+                    while (peek() != '\n' && !isAtEnd()) {
+                        advance();
+                    }
                 } else {
                     addToken(SLASH);
                 }
@@ -193,7 +195,10 @@ public class Scanner {
 
     // Helper methods
 
-    // Think of a 'conditional advance()': Only consumes current char if it's what we're looking for.
+    /*
+     * Think of a 'conditional advance()': Only consumes current char if it's what
+     * we're looking for.
+     */
     private boolean match(char expected) {
         if (isAtEnd()) {
             return false;
