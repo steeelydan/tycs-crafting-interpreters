@@ -1,5 +1,7 @@
 # Bob Nystrom: Crafting Interpreters
 
+https://teachyourselfcs.com/
+
 https://craftinginterpreters.com/
 
 https://github.com/munificent/craftinginterpreters
