@@ -10,5 +10,10 @@ then
     java -cp ./jlox/src com/craftinginterpreters/lox/Lox
 elif [ "$1" = "interpret" ]
 then
-    java -cp ./jlox/src com/craftinginterpreters/lox/Lox demo.lox
+    if [ -z "$2" ]
+    then
+        echo "Specify a file to interpret."
+    else
+        java -cp ./jlox/src com/craftinginterpreters/lox/Lox "$2"
+    fi
 fi
