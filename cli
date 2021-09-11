@@ -4,7 +4,7 @@ then
     javac --source-path ./jlox/src ./jlox/src/com/craftinginterpreters/lox/Lox.java
 elif [ "$1" = "clean" ]
 then
-    rm ./jlox/src/com/craftinginterpreters/lox/*.class
+    rm -f ./jlox/src/com/craftinginterpreters/lox/*.class
 elif [ "$1" = "repl" ]
 then
     java -cp ./jlox/src com/craftinginterpreters/lox/Lox

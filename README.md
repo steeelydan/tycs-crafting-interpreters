@@ -8,6 +8,6 @@ https://github.com/munificent/craftinginterpreters
 
 ## jlox
 
--   Compile the compiler: `./run compile`
--   Run REPL: `./run repl`
--   Run interpreter on file: `./run interpret demo.lox`
+-   Compile the compiler: `./cli compile`
+-   Run REPL: `./cli repl`
+-   Run interpreter on file: `./cli interpret demo.lox`
