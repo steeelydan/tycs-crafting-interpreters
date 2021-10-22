@@ -9,11 +9,11 @@ import static com.craftinginterpreters.lox.TokenType.*;
 
 public class Scanner {
     private final String source;
+    private static final Map<String, TokenType> keywords;
     private final List<Token> tokens = new ArrayList<>();
     private int start = 0;
     private int current = 0;
     private int line = 1;
-    private static final Map<String, TokenType> keywords;
 
     static {
         keywords = new HashMap<>();
@@ -45,92 +45,94 @@ public class Scanner {
             start = current;
             scanToken();
         }
-        tokens.add(new Token(EOF, "", null, line));
-        return tokens;
 
+        tokens.add(new Token(EOF, "", null, line));
+
+        return tokens;
     }
 
     private void scanToken() {
         char character = advance();
+
         switch (character) {
-            case '(':
-                addToken(LEFT_PAREN);
-                break;
-            case ')':
-                addToken(RIGHT_PAREN);
-                break;
-            case '{':
-                addToken(LEFT_BRACE);
-                break;
-            case '}':
-                addToken(RIGHT_BRACE);
-                break;
-            case ',':
-                addToken(COMMA);
-                break;
-            case '.':
-                addToken(DOT);
-                break;
-            case '-':
-                addToken(MINUS);
-                break;
-            case '+':
-                addToken(PLUS);
-                break;
-            case ';':
-                addToken(SEMICOLON);
-                break;
-            case '*':
-                addToken(STAR);
-                break;
-            case '!':
-                addToken(match('=') ? BANG_EQUAL : BANG);
-                break;
-            case '=':
-                addToken(match('=') ? EQUAL_EQUAL : EQUAL);
-                break;
-            case '<':
-                addToken(match('=') ? LESS_EQUAL : LESS);
-                break;
-            case '>':
-                addToken(match('=') ? GREATER_EQUAL : GREATER);
-                break;
-            case '/':
-                if (match('/')) {
-                    // A comment goes until the end of the line.
-                    while (peek() != '\n' && !isAtEnd()) {
-                        advance();
-                    }
-                } else {
-                    addToken(SLASH);
+        case '(':
+            addToken(LEFT_PAREN);
+            break;
+        case ')':
+            addToken(RIGHT_PAREN);
+            break;
+        case '{':
+            addToken(LEFT_BRACE);
+            break;
+        case '}':
+            addToken(RIGHT_BRACE);
+            break;
+        case ',':
+            addToken(COMMA);
+            break;
+        case '.':
+            addToken(DOT);
+            break;
+        case '-':
+            addToken(MINUS);
+            break;
+        case '+':
+            addToken(PLUS);
+            break;
+        case ';':
+            addToken(SEMICOLON);
+            break;
+        case '*':
+            addToken(STAR);
+            break;
+        case '!':
+            addToken(match('=') ? BANG_EQUAL : BANG);
+            break;
+        case '=':
+            addToken(match('=') ? EQUAL_EQUAL : EQUAL);
+            break;
+        case '<':
+            addToken(match('=') ? LESS_EQUAL : LESS);
+            break;
+        case '>':
+            addToken(match('=') ? GREATER_EQUAL : GREATER);
+            break;
+        case '/':
+            if (match('/')) {
+                // A comment goes until the end of the line.
+                while (peek() != '\n' && !isAtEnd()) {
+                    advance();
                 }
-                break;
+            } else {
+                addToken(SLASH);
+            }
+            break;
 
-            case ' ':
-            case '\r':
-            case '\t':
-                // Ignore whitespace.
-                break;
+        case ' ':
+        case '\r':
+        case '\t':
+            // Ignore whitespace.
+            break;
 
-            case '\n':
-                line++;
-                break;
+        case '\n':
+            line++;
+            break;
 
-            case '"':
-                string();
-                break;
+        case '"':
+            string();
+            break;
 
-            default:
-                if (isDigit(character)) {
-                    number();
-                } else if (isAlpha(character)) {
-                    identifier();
-                } else {
-                    Lox.error(line, "Unexpected character.");
-                }
-                break;
+        default:
+            if (isDigit(character)) {
+                number();
+            } else if (isAlpha(character)) {
+                identifier();
+            } else {
+                Lox.error(line, "Unexpected character.");
+            }
+
+            break;
         }
-
     }
 
     // Identifiers
@@ -144,6 +146,7 @@ public class Scanner {
         String text = source.substring(start, current);
 
         TokenType type = keywords.get(text);
+
         if (type == null) {
             type = IDENTIFIER;
         }
@@ -208,6 +211,7 @@ public class Scanner {
         }
 
         current++;
+
         return true;
     }
 
@@ -216,6 +220,7 @@ public class Scanner {
         if (isAtEnd()) {
             return '\0';
         }
+
         return source.charAt(current);
     }
 
@@ -223,6 +228,7 @@ public class Scanner {
         if (current + 1 >= source.length()) {
             return '\0';
         }
+
         return source.charAt(current + 1);
     }
 
@@ -245,6 +251,7 @@ public class Scanner {
     // Consume the character
     private char advance() {
         current++;
+
         return source.charAt(current - 1);
     }
 
