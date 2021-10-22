@@ -8,12 +8,15 @@ then
 elif [ "$1" = "repl" ]
 then
     java -cp ./jlox/src com/craftinginterpreters/lox/Lox
-elif [ "$1" = "interpret" ]
-then
-    if [ -z "$2" ]
+else
+    if [ -z "$1" ]
     then
-        echo "Specify a file to interpret."
+        echo "Arguments:"
+        echo "repl            Run REPL"
+        echo "<filename>.lox  Interpret file"
+        echo "compile         Compile Lox Java Sources"
+        echo "clean           Delete .class files"
     else
-        java -cp ./jlox/src com/craftinginterpreters/lox/Lox "$2"
+        java -cp ./jlox/src com/craftinginterpreters/lox/Lox "$1"
     fi
 fi

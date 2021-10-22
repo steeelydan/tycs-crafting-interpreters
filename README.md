@@ -6,8 +6,10 @@ https://craftinginterpreters.com/
 
 https://github.com/munificent/craftinginterpreters
 
-## jlox
+## jlox CLI
 
--   Compile the compiler: `./cli compile`
+-   Help: `./cli`
+-   Run interpreter on file: `./cli <yourfile>.lox`
 -   Run REPL: `./cli repl`
--   Run interpreter on file: `./cli interpret demo.lox`
+-   Compile the compiler: `./cli compile`
+-   Clean .class files: `./cli clean`
