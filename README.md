@@ -13,3 +13,4 @@ https://github.com/munificent/craftinginterpreters
 -   Run REPL: `./cli repl`
 -   Compile the compiler: `./cli compile`
 -   Clean .class files: `./cli clean`
+-   Generate AST classes: `./cli compile` -> `./cli generate`
