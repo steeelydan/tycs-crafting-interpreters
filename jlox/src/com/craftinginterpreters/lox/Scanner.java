@@ -151,11 +151,12 @@ public class Scanner {
             advance();
         }
 
-        // Check if identifier is a reserved word
         String text = source.substring(start, current);
 
+        // Check if identifier is a reserved word
         TokenType type = keywords.get(text);
 
+        // ...if not, its a normal identifier
         if (type == null) {
             type = IDENTIFIER;
         }
@@ -168,6 +169,7 @@ public class Scanner {
      */
     private void string() {
         while (peek() != '"' && !isAtEnd()) {
+            // We support multiline strings
             if (peek() == '\n') {
                 line++;
                 advance();
