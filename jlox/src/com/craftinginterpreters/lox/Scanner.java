@@ -39,6 +39,11 @@ public class Scanner {
         this.source = source;
     }
 
+    /**
+     * Consume all chars in source and tokenize them
+     *
+     * @return Token list
+     */
     List<Token> scanTokens() {
         while (!isAtEnd()) {
             // We are at the beginning of the next lexeme.
@@ -51,6 +56,9 @@ public class Scanner {
         return tokens;
     }
 
+    /**
+     * Detect and tokenize a single token; add it to token list
+     */
     private void scanToken() {
         char character = advance();
 
@@ -135,8 +143,9 @@ public class Scanner {
         }
     }
 
-    // Identifiers
-
+    /**
+     * Tokenize identifier & add it to token list
+     */
     private void identifier() {
         while (isAlphaNumeric(peek())) {
             advance();
@@ -154,8 +163,9 @@ public class Scanner {
         addToken(type);
     }
 
-    // Literals
-
+    /**
+     * Tokenize string literal & add to token list
+     */
     private void string() {
         while (peek() != '"' && !isAtEnd()) {
             if (peek() == '\n') {
@@ -178,6 +188,9 @@ public class Scanner {
         }
     }
 
+    /**
+     * Tokenize number literal & add to token list
+     */
     private void number() {
         while (isDigit(peek())) {
             advance();
@@ -198,9 +211,22 @@ public class Scanner {
 
     // Helper methods
 
-    /*
+    /**
+     * Consume the character. Advances <b>current</b>!
+     *
+     * @return The char at the OLD <b>current</b> position
+     */
+    private char advance() {
+        current++;
+
+        return source.charAt(current - 1);
+    }
+
+    /**
      * Think of a 'conditional advance()': Only consumes current char if it's what
-     * we're looking for.
+     * we're looking for. Advances <b>current</b> if successful
+     *
+     * @param expected The value we expect for the current char
      */
     private boolean match(char expected) {
         if (isAtEnd()) {
@@ -215,7 +241,12 @@ public class Scanner {
         return true;
     }
 
-    // Similar to advance, but does not consume the character
+    /**
+     * Similar to advance, but does not consume the character. Operates on
+     * <b>current</b>, which is already ++ed at this point!
+     *
+     * @return Either the char at <b>current</b> or \0
+     */
     private char peek() {
         if (isAtEnd()) {
             return '\0';
@@ -224,6 +255,11 @@ public class Scanner {
         return source.charAt(current);
     }
 
+    /**
+     * Peeks one char after <b>current</b>, which is already ++ed at this point!
+     *
+     * @return Either the char at <b>current</b> + 1 or \0
+     */
     private char peekNext() {
         if (current + 1 >= source.length()) {
             return '\0';
@@ -248,18 +284,21 @@ public class Scanner {
         return current >= source.length();
     }
 
-    // Consume the character
-    private char advance() {
-        current++;
-
-        return source.charAt(current - 1);
-    }
-
+    /**
+     * Adds token without literal value to token list
+     *
+     * @param type TokenType
+     */
     private void addToken(TokenType type) {
         addToken(type, null);
     }
 
-    // Method overloading
+    /**
+     * Adds token to token list
+     *
+     * @param type    TokenType
+     * @param literal Literal token value
+     */
     private void addToken(TokenType type, Object literal) {
         String text = source.substring(start, current);
         tokens.add(new Token(type, text, literal, line));
