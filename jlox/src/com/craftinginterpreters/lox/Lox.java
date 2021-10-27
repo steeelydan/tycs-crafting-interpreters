@@ -21,6 +21,11 @@ public class Lox {
         }
     }
 
+    /**
+     * Run on a file
+     * @param path Path to the source file
+     * @throws IOException
+     */
     private static void runFile(String path) throws IOException {
         byte[] bytes = Files.readAllBytes(Paths.get(path));
         run(new String(bytes, Charset.defaultCharset()));
@@ -31,6 +36,10 @@ public class Lox {
         }
     }
 
+    /**
+     * Run in CLI mode
+     * @throws IOException
+     */
     private static void runPrompt() throws IOException {
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(input);
@@ -46,6 +55,10 @@ public class Lox {
         }
     }
 
+    /**
+     * Run Interpreter
+     * @param source The source text
+     */
     private static void run(String source) {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
@@ -56,11 +69,38 @@ public class Lox {
         }
     }
 
+    /**
+     * Reports a generic error
+     *
+     * @param line    Line number
+     * @param message Error message
+     */
     static void error(int line, String message) {
-        report(line, "", message);
+        reportError(line, "", message);
     }
 
-    private static void report(int line, String where, String message) {
+    /**
+     * Reports an error regarding a token
+     *
+     * @param token   The erroring token
+     * @param message Error message
+     */
+    static void error(Token token, String message) {
+        if (token.type == TokenType.EOF) {
+            reportError(token.line, " at end", message);
+        } else {
+            reportError(token.line, " at '" + token.lexeme + "'", message);
+        }
+    }
+
+    /**
+     * Prints an error to the console
+     *
+     * @param line    Line number
+     * @param where   Position in line
+     * @param message Error message
+     */
+    private static void reportError(int line, String where, String message) {
         System.err.println("[line " + line + "] Error" + where + ": " + message);
         hadError = true;
     }
