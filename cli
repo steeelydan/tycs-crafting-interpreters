@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ "$1" = "compile" ]
 then
-    javac --source-path ./jlox/src ./jlox/src/com/craftinginterpreters/lox/Lox.java ./jlox/src/com/craftinginterpreters/tool/GenerateAst.java
+    javac --source-path ./jlox/src ./jlox/src/com/craftinginterpreters/lox/Lox.java ./jlox/src/com/craftinginterpreters/lox/AstPrinter.java ./jlox/src/com/craftinginterpreters/tool/GenerateAst.java
 elif [ "$1" = "clean" ]
 then
     rm -f ./jlox/src/com/craftinginterpreters/lox/*.class ./jlox/src/com/craftinginterpreters/tool/*.class
@@ -11,6 +11,9 @@ then
 elif [ "$1" = "generate" ]
 then
     java -cp ./jlox/src com/craftinginterpreters/tool/GenerateAst ./jlox/src/com/craftinginterpreters/lox
+elif [ "$1" = "print" ]
+then
+    java -cp ./jlox/src com/craftinginterpreters/lox/AstPrinter
 else
     if [ -z "$1" ]
     then
