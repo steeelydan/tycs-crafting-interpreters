@@ -1,0 +1,17 @@
+{
+    "name": "tslox",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "lox": "ts-node --esm src/lox.ts"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "18.15.11",
+        "ts-node": "10.9.1",
+        "typescript": "5.0.4"
+    }
+}

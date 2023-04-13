@@ -6,7 +6,14 @@ https://craftinginterpreters.com/
 
 https://github.com/munificent/craftinginterpreters
 
-## jlox CLI
+## tslox
+
+-   Requirements:
+    -   Node (tested on v18.15.0)
+-   Install dependencies: `npm ci`
+-   Run: `npm run lox`
+
+## jlox
 
 -   Requirements:
 

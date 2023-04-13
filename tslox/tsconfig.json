@@ -1,0 +1,23 @@
+{
+    "include": ["./src"],
+    "exclude": ["node_modules"],
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "module": "ES2022",
+        "esModuleInterop": true,
+        "allowJs": false,
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": false,
+        "skipLibCheck": true,
+
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "noImplicitThis": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "forceConsistentCasingInFileNames": true
+    }
+}
