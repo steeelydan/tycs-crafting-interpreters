@@ -1,0 +1,29 @@
+#!/bin/bash
+if [ "$1" = "compile" ]
+then
+    javac --source-path ./src ./src/com/craftinginterpreters/lox/Lox.java ./src/com/craftinginterpreters/lox/AstPrinter.java ./src/com/craftinginterpreters/tool/GenerateAst.java
+elif [ "$1" = "clean" ]
+then
+    rm -f ./src/com/craftinginterpreters/lox/*.class ./src/com/craftinginterpreters/tool/*.class
+elif [ "$1" = "repl" ]
+then
+    java -cp ./src com/craftinginterpreters/lox/Lox
+elif [ "$1" = "generate" ]
+then
+    java -cp ./src com/craftinginterpreters/tool/GenerateAst ./src/com/craftinginterpreters/lox
+elif [ "$1" = "print" ]
+then
+    java -cp ./src com/craftinginterpreters/lox/AstPrinter
+else
+    if [ -z "$1" ]
+    then
+        echo "Arguments:"
+        echo "repl            Run REPL"
+        echo "<filename>.lox  Interpret file"
+        echo "compile         Compile Lox Java Sources"
+        echo "clean           Delete .class files"
+        echo "generate        Auto-generate AST classes"
+    else
+        java -cp ./src com/craftinginterpreters/lox/Lox "$1"
+    fi
+fi

@@ -8,6 +8,11 @@ https://github.com/munificent/craftinginterpreters
 
 ## jlox CLI
 
+-   Requirements:
+
+    -   Linux or MacOS (tested on Ubuntu 22.04)
+    -   Tested with OpenJDK 17
+
 -   Help: `./cli`
 -   Run interpreter on file: `./cli <yourfile>.lox`
 -   Run REPL: `./cli repl`
