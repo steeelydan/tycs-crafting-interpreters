@@ -1,1 +1,17 @@
+// This is a comment
+(( )){}
+!*+-/=<> <= ==
+
+"okay now a string"
+
 cool();
+
+newstuff4 = 3000
+
+for (i = 0; i < 10; i++) {
+    var somevar = 1;
+}
+
+1.011234
+2434
+.00

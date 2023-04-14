@@ -5,7 +5,7 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "lox": "ts-node --esm src/lox.ts"
+        "lox": "ts-node --esm src/run.ts"
     },
     "author": "",
     "license": "ISC",
